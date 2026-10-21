@@ -12,21 +12,8 @@
     "binding": "ASSETS"
   },
   "vars": {
-    "LEAD_DELIVERY_EMAIL": "spurjae@gmail.com",
-    "LEAD_NOTIFY_EMAIL": "spurjae@gmail.com"
+    "TRACER_FORMS_URL": "https://tracer-staging.jaedonaspurlock.workers.dev/api/forms"
   },
-  "send_email": [
-    {
-      "name": "LEAD_EMAIL",
-      "allowed_sender_addresses": [
-        "info@asphaltpavingstgeorge.com"
-      ],
-      "allowed_destination_addresses": [
-        "info@asphaltpavingstgeorge.com",
-        "spurjae@gmail.com"
-      ]
-    }
-  ],
   "observability": {
     "logs": {
       "enabled": true,

@@ -15,37 +15,9 @@ function digits(value: string) {
   return value.replace(/\D/g, "");
 }
 
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function readEnv(key: "LEAD_DELIVERY_EMAIL" | "LEAD_NOTIFY_EMAIL", locals: App.Locals): string {
-  const raw =
-    locals.runtime?.env?.[key] ??
-    (workerEnv as Record<string, unknown>)[key];
-  return typeof raw === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw.trim()) ? raw.trim() : "";
-}
-
-function leadMailBinding(locals: App.Locals) {
-  const mail = locals.runtime?.env?.LEAD_EMAIL ?? (workerEnv as { LEAD_EMAIL?: unknown }).LEAD_EMAIL;
-  if (!mail || typeof mail !== "object" || !("send" in mail) || typeof mail.send !== "function") {
-    return undefined;
-  }
-  return mail as {
-    send: (message: {
-      from: string | { name: string; email: string };
-      to?: string | { name: string; email: string };
-      bcc?: string | { name: string; email: string };
-      subject: string;
-      replyTo?: string | { name: string; email: string };
-      text?: string;
-      html?: string;
-    }) => Promise<unknown>;
-  };
+function readEnv(key: "TRACER_FORMS_URL" | "TRACER_FORM_KEY", locals: App.Locals): string {
+  const raw = locals.runtime?.env?.[key] ?? (workerEnv as Record<string, unknown>)[key];
+  return typeof raw === "string" ? raw.trim() : "";
 }
 
 export const POST: APIRoute = async ({ request, redirect, locals }) => {
@@ -77,56 +49,40 @@ export const POST: APIRoute = async ({ request, redirect, locals }) => {
     return redirect("/contact/?error=1#error-fields", 303);
   }
 
-  const mail = leadMailBinding(locals);
-  if (!mail) {
-    return redirect("/contact/?error=bind#error-bind", 303);
-  }
-
-  const deliveryEmail = readEnv("LEAD_DELIVERY_EMAIL", locals);
-  const notifyEmail = readEnv("LEAD_NOTIFY_EMAIL", locals);
-
-  if (!deliveryEmail) {
+  // Tracer stores the submission under this Site's Workspace, forwards it to the business
+  // from this Site's address, and counts it as a lead. Every Site shares one Forms key and
+  // names itself by hostname.
+  const formsUrl = readEnv("TRACER_FORMS_URL", locals);
+  const formKey = readEnv("TRACER_FORM_KEY", locals);
+  if (!formsUrl || !formKey) {
     return redirect("/contact/?error=config#error-config", 303);
   }
 
-  const subject = `New paving lead: ${service}`;
-
-  const text = [
-    "New estimate request from the website",
-    "",
-    `Name: ${name}`,
-    `Phone: ${phone}`,
-    `Email: ${email}`,
-    `Service: ${service}`,
-    `Approx. size: ${sizeNumber.toLocaleString("en-US")} sq ft`,
-  ].join("\n");
-
-  const html = [
-    "<p>New estimate request from the website.</p>",
-    "<ul>",
-    `<li><strong>Name:</strong> ${escapeHtml(name)}</li>`,
-    `<li><strong>Phone:</strong> ${escapeHtml(phone)}</li>`,
-    `<li><strong>Email:</strong> ${escapeHtml(email)}</li>`,
-    `<li><strong>Service:</strong> ${escapeHtml(service)}</li>`,
-    `<li><strong>Approx. size:</strong> ${escapeHtml(sizeNumber.toLocaleString("en-US"))} sq ft</li>`,
-    "</ul>",
-  ].join("");
-
-  const bcc =
-    notifyEmail && notifyEmail.toLowerCase() !== deliveryEmail.toLowerCase() ? notifyEmail : undefined;
+  const submission = {
+    site: new URL(business.url).hostname,
+    submissionId: crypto.randomUUID(),
+    page: new URL(request.headers.get("referer") ?? "/contact/", request.url).pathname,
+    fields: {
+      Name: name,
+      Phone: phone,
+      Email: email,
+      Service: service,
+      "Approx. size": `${sizeNumber.toLocaleString("en-US")} sq ft`,
+    },
+  };
 
   try {
-    await mail.send({
-      from: { name: business.name, email: business.email },
-      to: deliveryEmail,
-      ...(bcc ? { bcc } : {}),
-      replyTo: { name, email },
-      subject,
-      text,
-      html,
+    const response = await fetch(formsUrl, {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${formKey}` },
+      body: JSON.stringify(submission),
     });
+    if (!response.ok) {
+      console.error("Tracer refused the lead:", response.status, await response.text().catch(() => ""));
+      return redirect("/contact/?error=send#error-send", 303);
+    }
   } catch (error) {
-    console.error("LEAD_EMAIL send failed:", error);
+    console.error("Tracer lead post failed:", error);
     return redirect("/contact/?error=send#error-send", 303);
   }
 

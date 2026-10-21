@@ -1,8 +1,7 @@
 {
   "id": "pocatello",
   "cloudflareProject": "asphalt-paving-pocatello",
-  "leadDeliveryEmail": "spurjae@gmail.com",
-  "leadNotifyEmail": "spurjae@gmail.com",
+  "tracerFormsUrl": "https://tracer-staging.jaedonaspurlock.workers.dev/api/forms",
   "market": {
     "climateLabel": "Portneuf Valley freeze-thaw",
     "climateSummary": "Cold winters, plow traffic, and spring thaw make drainage and a compacted base critical.",
@@ -35,15 +34,36 @@
     "serviceAreaLabel": "Pocatello, Idaho"
   },
   "socials": [
-    { "name": "Facebook", "href": "https://www.facebook.com" },
-    { "name": "Instagram", "href": "https://www.instagram.com" },
-    { "name": "Twitter", "href": "https://twitter.com" },
-    { "name": "YouTube", "href": "https://www.youtube.com" }
+    {
+      "name": "Facebook",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "name": "Twitter",
+      "href": "https://twitter.com"
+    },
+    {
+      "name": "YouTube",
+      "href": "https://www.youtube.com"
+    }
   ],
   "hours": [
-    { "days": "Monday–Friday", "time": "9 AM–6 PM" },
-    { "days": "Saturday", "time": "9 AM–4 PM" },
-    { "days": "Sunday", "time": "Closed" }
+    {
+      "days": "Monday–Friday",
+      "time": "9 AM–6 PM"
+    },
+    {
+      "days": "Saturday",
+      "time": "9 AM–4 PM"
+    },
+    {
+      "days": "Sunday",
+      "time": "Closed"
+    }
   ],
   "outboundLink": {
     "href": "http://lasvegasasphaltservices.com",

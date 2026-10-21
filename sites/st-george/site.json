@@ -1,8 +1,7 @@
 {
   "id": "st-george",
   "cloudflareProject": "asphalt-paving-st-george",
-  "leadDeliveryEmail": "spurjae@gmail.com",
-  "leadNotifyEmail": "spurjae@gmail.com",
+  "tracerFormsUrl": "https://tracer-staging.jaedonaspurlock.workers.dev/api/forms",
   "market": {
     "climateLabel": "southern Utah desert heat",
     "climateSummary": "Extreme UV, triple-digit summer heat, dust, and short high-intensity storms make compaction, drainage, and timely sealing critical.",
@@ -35,15 +34,36 @@
     "serviceAreaLabel": "St. George, Utah"
   },
   "socials": [
-    { "name": "Facebook", "href": "https://www.facebook.com" },
-    { "name": "Instagram", "href": "https://www.instagram.com" },
-    { "name": "Twitter", "href": "https://twitter.com" },
-    { "name": "YouTube", "href": "https://www.youtube.com" }
+    {
+      "name": "Facebook",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "name": "Twitter",
+      "href": "https://twitter.com"
+    },
+    {
+      "name": "YouTube",
+      "href": "https://www.youtube.com"
+    }
   ],
   "hours": [
-    { "days": "Monday–Friday", "time": "8 AM–5 PM" },
-    { "days": "Saturday", "time": "Closed" },
-    { "days": "Sunday", "time": "Closed" }
+    {
+      "days": "Monday–Friday",
+      "time": "8 AM–5 PM"
+    },
+    {
+      "days": "Saturday",
+      "time": "Closed"
+    },
+    {
+      "days": "Sunday",
+      "time": "Closed"
+    }
   ],
   "outboundLink": {
     "href": "https://pocatelloasphaltpaving.com",

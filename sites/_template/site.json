@@ -1,8 +1,7 @@
 {
   "id": "city-name",
   "cloudflareProject": "asphalt-paving-city-name",
-  "leadDeliveryEmail": "owner@example.com",
-  "leadNotifyEmail": "you@example.com",
+  "tracerFormsUrl": "https://tracer.example.com/api/forms",
   "market": {
     "climateLabel": "local weather",
     "climateSummary": "Local temperatures, precipitation, and traffic patterns affect pavement performance.",
@@ -35,15 +34,36 @@
     "serviceAreaLabel": "City, Idaho"
   },
   "socials": [
-    { "name": "Facebook", "href": "https://www.facebook.com" },
-    { "name": "Instagram", "href": "https://www.instagram.com" },
-    { "name": "Twitter", "href": "https://twitter.com" },
-    { "name": "YouTube", "href": "https://www.youtube.com" }
+    {
+      "name": "Facebook",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "name": "Twitter",
+      "href": "https://twitter.com"
+    },
+    {
+      "name": "YouTube",
+      "href": "https://www.youtube.com"
+    }
   ],
   "hours": [
-    { "days": "Monday–Friday", "time": "9 AM–6 PM" },
-    { "days": "Saturday", "time": "9 AM–4 PM" },
-    { "days": "Sunday", "time": "Closed" }
+    {
+      "days": "Monday–Friday",
+      "time": "9 AM–6 PM"
+    },
+    {
+      "days": "Saturday",
+      "time": "9 AM–4 PM"
+    },
+    {
+      "days": "Sunday",
+      "time": "Closed"
+    }
   ],
   "serviceOptions": [
     "Asphalt Driveway Paving",
