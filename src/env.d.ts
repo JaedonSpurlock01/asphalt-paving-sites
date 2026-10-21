@@ -20,8 +20,8 @@ declare module "virtual:site" {
   export interface SiteConfig {
     id: string;
     cloudflareProject: string;
-    leadDeliveryEmail: string;
-    leadNotifyEmail: string;
+    /** Tracer's public forms endpoint, e.g. https://tracer.example.com/api/forms */
+    tracerFormsUrl: string;
     market: {
       climateLabel: string;
       climateSummary: string;
@@ -58,14 +58,11 @@ declare module "virtual:site-assets" {
   export default assets;
 }
 
-type LeadEmailBinding = import("@cloudflare/workers-types").SendEmail;
-
 type CloudflareEnv = {
-  LEAD_EMAIL: LeadEmailBinding;
-  /** Real business inbox — form leads are delivered here (not the public info@ address). */
-  LEAD_DELIVERY_EMAIL: string;
-  /** Optional BCC copy for you (set in Pages/Worker env, not public). */
-  LEAD_NOTIFY_EMAIL?: string;
+  /** Tracer's public forms endpoint; set from site.json by sync-config. */
+  TRACER_FORMS_URL: string;
+  /** The Organization's Forms key from Tracer (Integrations > Cloudflare). Passed to every city by `npm run deploy` from the TRACER_FORM_KEY environment variable. */
+  TRACER_FORM_KEY: string;
 };
 
 type Runtime = import("@astrojs/cloudflare").Runtime<CloudflareEnv>;

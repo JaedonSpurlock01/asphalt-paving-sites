@@ -19,7 +19,7 @@ import { serviceOptions } from "../data/site";
     role="alert"
     tabindex="-1"
   >
-    Lead delivery is not configured yet. Please call us instead.
+    Request delivery is not configured yet. Please call us instead.
   </p>
   <p
     id="error-bind"
@@ -27,7 +27,7 @@ import { serviceOptions } from "../data/site";
     role="alert"
     tabindex="-1"
   >
-    Email is not wired on the server yet. Please call us instead.
+    Request delivery is not wired on the server yet. Please call us instead.
   </p>
   <p
     id="error-send"
@@ -35,8 +35,7 @@ import { serviceOptions } from "../data/site";
     role="alert"
     tabindex="-1"
   >
-    We could not send that request. This is usually Cloudflare Email Sending (domain onboarding or verified delivery
-    address), not DNS propagation. Try again in a few minutes or call us.
+    We could not send that request. Try again in a few minutes or call us.
   </p>
   <p id="lead-form-error" class="lead-form-error border border-carbon bg-sun/40 px-3 py-2 text-sm font-semibold text-carbon" role="alert" hidden></p>
   <div class="absolute left-[-9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
@@ -105,9 +104,9 @@ import { serviceOptions } from "../data/site";
     }
     var messages = {
       "1": "Check every field. Use a real email, a phone number, a size in square feet, and one of the listed services.",
-      config: "Lead delivery is not configured yet. Please call us instead.",
-      bind: "Email is not wired on the server yet. Please call us instead.",
-      send: "We could not send that request. Confirm Email Sending is enabled for the domain, then try again or call us.",
+      config: "Request delivery is not configured yet. Please call us instead.",
+      bind: "Request delivery is not wired on the server yet. Please call us instead.",
+      send: "We could not send that request. Try again in a few minutes or call us.",
     };
     el.textContent = messages[code] || messages.send;
     el.removeAttribute("hidden");

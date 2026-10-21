@@ -7,8 +7,7 @@ const sitesDir = join(rootDir, "sites");
 for (const id of readdirSync(sitesDir)) {
   if (id.startsWith("_") || id.startsWith(".")) continue;
   const site = loadSite(id);
-  const info = site.business.email;
-  const destinations = [...new Set([info, site.leadDeliveryEmail, site.leadNotifyEmail].filter(Boolean))];
+  if (!site.tracerFormsUrl) throw new Error(`sites/${id}/site.json needs tracerFormsUrl`);
 
   const wrangler = {
     name: site.cloudflareProject,
@@ -22,16 +21,8 @@ for (const id of readdirSync(sitesDir)) {
       binding: "ASSETS",
     },
     vars: {
-      LEAD_DELIVERY_EMAIL: site.leadDeliveryEmail,
-      LEAD_NOTIFY_EMAIL: site.leadNotifyEmail,
+      TRACER_FORMS_URL: site.tracerFormsUrl,
     },
-    send_email: [
-      {
-        name: "LEAD_EMAIL",
-        allowed_sender_addresses: [info],
-        allowed_destination_addresses: destinations,
-      },
-    ],
     observability: {
       logs: {
         enabled: true,

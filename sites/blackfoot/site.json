@@ -1,8 +1,7 @@
 {
   "id": "blackfoot",
   "cloudflareProject": "asphalt-paving-blackfoot",
-  "leadDeliveryEmail": "spurjae@gmail.com",
-  "leadNotifyEmail": "spurjae@gmail.com",
+  "tracerFormsUrl": "https://tracer-staging.jaedonaspurlock.workers.dev/api/forms",
   "market": {
     "climateLabel": "Snake River Plain freeze-thaw",
     "climateSummary": "Freezing winters, warm dry summers, irrigation moisture, and spring thaw make drainage and a compacted base critical.",
@@ -35,15 +34,36 @@
     "serviceAreaLabel": "Blackfoot, Idaho"
   },
   "socials": [
-    { "name": "Facebook", "href": "https://www.facebook.com" },
-    { "name": "Instagram", "href": "https://www.instagram.com" },
-    { "name": "Twitter", "href": "https://twitter.com" },
-    { "name": "YouTube", "href": "https://www.youtube.com" }
+    {
+      "name": "Facebook",
+      "href": "https://www.facebook.com"
+    },
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com"
+    },
+    {
+      "name": "Twitter",
+      "href": "https://twitter.com"
+    },
+    {
+      "name": "YouTube",
+      "href": "https://www.youtube.com"
+    }
   ],
   "hours": [
-    { "days": "Monday–Friday", "time": "8 AM–5 PM" },
-    { "days": "Saturday", "time": "Closed" },
-    { "days": "Sunday", "time": "Closed" }
+    {
+      "days": "Monday–Friday",
+      "time": "8 AM–5 PM"
+    },
+    {
+      "days": "Saturday",
+      "time": "Closed"
+    },
+    {
+      "days": "Sunday",
+      "time": "Closed"
+    }
   ],
   "outboundLinks": [
     {
